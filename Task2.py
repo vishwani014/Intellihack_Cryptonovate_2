@@ -1,15 +1,14 @@
+import json
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 import numpy as np
 
-# Dataset creation
-dataset = {
-    "Greet": ["Hi", "How are you?", "Hello"],
-    "Farewell": ["Goodbye", "See you later", "Take care"],
-    "Inquiry": ["What's the weather like today?", "Can you tell me the time?", "Where is the nearest restaurant?"]
-}
+import pandas as pd
 
-# Combine all examples and labels
+with open('intent_dataset.json', 'r') as file:
+    dataset = json.load(file)
+
+# Extract examples and labels from the loaded dataset
 examples = []
 labels = []
 for intent, texts in dataset.items():
@@ -49,4 +48,4 @@ phrase = input("Enter a phrase: ")
 intent, confidence = classify_intent_with_fallback(phrase)
 print("Text: ", phrase)
 print("Intent: ", intent)
-print("Confidence: ", confidence)
+print("Confidence: ", confidence)
